@@ -101,6 +101,9 @@ public:
         
         if (res && res->status == 200) {
 			json j = json::parse(res->body);
+            if (j["status"] != "success")
+                return "";
+
 			if (code == requestCode::country) {
 				return j["country"];
 			}
@@ -159,7 +162,7 @@ public:
 
                 if (dwRetVal == NO_ERROR) {
                     for (int i = 0; i < (int)pTcpTable->dwNumEntries; i++) {
-						// filter out connections that are not established or in SYN_SENT state
+						// filter out connections that are not established
                         if (pTcpTable->table[i].dwOwningPid == pid &&
                             (pTcpTable->table[i].dwState == MIB_TCP_STATE_ESTAB)) {
 
