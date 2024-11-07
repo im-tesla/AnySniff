@@ -112,7 +112,7 @@ public:
 			}
         }
         else {
-			debug.log(_ERROR, "Failed to get data from ip-api.com.");
+			//debug.log(_ERROR, "Failed to get data from ip-api.com.");
 			return "";
         }
     }
