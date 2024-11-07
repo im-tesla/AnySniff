@@ -30,9 +30,9 @@ The program will initialize and begin sniffing for someone IP, logging them alon
 [2024-11-07 14:41:10] [INFO] Sniffing caller IP address...
 [2024-11-07 14:41:14] [INFO] ---------------
 [2024-11-07 14:41:14] [WARNING] New caller IP: xx.xx.xx.xx
-[2024-11-07 14:41:14] [WARNING] Country: Poland
-[2024-11-07 14:41:14] [WARNING] City: Warsaw
-[2024-11-07 14:41:14] [WARNING] ISP: PTK CENTERTEL MOBILE data services
+[2024-11-07 14:41:14] [WARNING] Country: Germany
+[2024-11-07 14:41:14] [WARNING] City: Berlin
+[2024-11-07 14:41:14] [WARNING] ISP: Data Services
 ```
 
 ## Legal Disclaimer
