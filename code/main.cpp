@@ -2,7 +2,7 @@
 #include "anydesk.h"
 #include "debug.h"
 #include "exiting.h"
-
+ 
 std::vector<std::string> alreadySniffed;
 
 int main() {
