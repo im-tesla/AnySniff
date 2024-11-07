@@ -89,90 +89,7 @@ public:
     }
 
     std::string getData(std::string ip, requestCode code) {
-        bool initialized = true; // Adjust as needed for your setup
-        if (!initialized) {
-            debug.log(_ERROR, "Anydesk library not initialized.");
-            return "";
-        }
-
-        std::string output = "";
-        std::string url = "/json/" + ip;
-        std::wstring server = L"ip-api.com";
-
-        // open WinHTTP session
-        HINTERNET hSession = WinHttpOpen(L"anysniff",
-            WINHTTP_ACCESS_TYPE_DEFAULT_PROXY,
-            WINHTTP_NO_PROXY_NAME,
-            WINHTTP_NO_PROXY_BYPASS, 0);
-        if (hSession) {
-            // connect to the server
-            HINTERNET hConnect = WinHttpConnect(hSession, server.c_str(),
-                INTERNET_DEFAULT_HTTP_PORT, 0);
-            if (hConnect) {
-                // send request
-                HINTERNET hRequest = WinHttpOpenRequest(hConnect, L"GET",
-                    std::wstring(url.begin(), url.end()).c_str(),
-                    NULL, WINHTTP_NO_REFERER,
-                    WINHTTP_DEFAULT_ACCEPT_TYPES, 0);
-
-                // valid request?
-                if (hRequest) {
-                    // send it!
-                    if (WinHttpSendRequest(hRequest, WINHTTP_NO_ADDITIONAL_HEADERS, 0,
-                        WINHTTP_NO_REQUEST_DATA, 0, 0, 0) &&
-                        WinHttpReceiveResponse(hRequest, NULL)) {
-
-                        DWORD bytesRead = 0;
-                        DWORD size = 0;
-                        std::string response;
-
-                        do {
-                            // get the size of the response
-                            WinHttpQueryDataAvailable(hRequest, &size);
-                            char* buffer = new char[size + 1];
-                            ZeroMemory(buffer, size + 1);
-
-                            // read the response
-                            WinHttpReadData(hRequest, (LPVOID)buffer, size, &bytesRead);
-                            response.append(buffer, bytesRead);
-
-                            // mem leaks !
-                            delete[] buffer;
-                        } while (size > 0);
-
-                        // handle invaild ip / local connection / flood?
-                        if (nlohmann::json::parse(response)["status"].get<std::string>() == "fail") {
-                            output = "Invaild IP (is it local network?)";
-                        }
-                        else {
-                            // parse the JSON response
-                            switch (code) {
-                            case requestCode::country:
-                                output = nlohmann::json::parse(response)["country"].get<std::string>();
-                                break;
-                            case requestCode::city:
-                                output = nlohmann::json::parse(response)["city"].get<std::string>();
-                                break;
-                            case requestCode::isp:
-                                output = nlohmann::json::parse(response)["isp"].get<std::string>();
-                                break;
-                            }
-                        }
-                    }
-                    else {
-                        debug.log(_ERROR, "Error: Failed to send WinHTTP request.");
-                    }
-                    WinHttpCloseHandle(hRequest);
-                }
-                WinHttpCloseHandle(hConnect);
-            }
-            WinHttpCloseHandle(hSession);
-        }
-        else {
-            debug.log(_ERROR, "Error: Failed to open WinHTTP session.");
-        }
-
-        return output;
+        // todo
     }
 
     std::vector<std::string> sniffCallerIP() {
@@ -229,11 +146,12 @@ public:
 
 							// filter out local IP addresses and duplicates
                             if (ipStr.rfind("192.0.0", 0) != 0 && ipStr.rfind("192.168.", 0) != 0 && std::find(ips.begin(), ips.end(), ipStr) == ips.end()) {
-								std::string isp = getData(ipStr, requestCode::isp);
+								//std::string isp = getData(ipStr, requestCode::isp);
 								// filter out anydesk servers (no one have internet connection from ovh or dod xd)
-								if (isp.find("OVH") == std::string::npos && isp.find("DoD") == std::string::npos) { // npos == not found
-                                    ips.push_back(ipStr);
-                                }
+								//if (isp.find("OVH") == std::string::npos && isp.find("DoD") == std::string::npos) { // npos == not found
+                                //    ips.push_back(ipStr);
+                                //}
+								ips.push_back(ipStr);
 
                             }
                         }
