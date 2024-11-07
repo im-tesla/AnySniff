@@ -1,6 +1,6 @@
 # AnySniff
 
-**AnySniff** is a C++20 program designed for educational and research purposes to identify the IP addresses of someone by them calling us or by calling them via AnyDesk. This tool logs information such as IP address, country, city, and ISP, allowing users to gain insights into caller details during AnyDesk sessions.
+**AnySniff** is a C++20 program designed for educational and research purposes to identify the IP addresses of someone by them calling us or by calling them via AnyDesk. This tool logs information such as IP address, country, city, and ISP, allowing users to gain insights into session details during AnyDesk sessions.
 
 ## Features
 
