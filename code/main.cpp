@@ -25,11 +25,10 @@ int main() {
 
 			debug.log(_INFO, "--------------------------");
 			debug.log(_WARNING, "New caller IP: ", ip.c_str());
-			/*
 			debug.log(_WARNING, "Country: ", anydesk.getData(ip, country).c_str());
 			debug.log(_WARNING, "City: ", anydesk.getData(ip, city).c_str());
 			debug.log(_WARNING, "ISP: ", anydesk.getData(ip, isp).c_str());
-			*/
+
 			alreadySniffed.push_back(ip);
 		}
 

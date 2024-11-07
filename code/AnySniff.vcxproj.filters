@@ -32,5 +32,8 @@
     <ClInclude Include="depedencies\json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="depedencies\httplib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,18 +1,25 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
+
 #include <string>
 #include <vector>
 #include <windows.h>
-#include <winhttp.h>
 #include <iphlpapi.h>
 #include <comdef.h>
 #include <Wbemidl.h>
 #include <iostream>
+#include <json.hpp>
 #include "debug.h"
-#include "depedencies/json.hpp"
+
+#include <httplib.h>
+#include <json.hpp>
+using json = nlohmann::json;
 
 #pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "iphlpapi.lib")
 #pragma comment(lib, "winhttp.lib")
+
+using json = nlohmann::json;
 
 enum requestCode {
     country,
@@ -88,8 +95,26 @@ public:
         }
     }
 
-    std::string getData(std::string ip, requestCode code) {
-        // todo
+    std::string getData(std::string ip, requestCode code) {		
+        httplib::Client client("http://ip-api.com");
+        auto res = client.Get("/json/" + ip);
+        
+        if (res && res->status == 200) {
+			json j = json::parse(res->body);
+			if (code == requestCode::country) {
+				return j["country"];
+			}
+			else if (code == requestCode::city) {
+				return j["city"];
+			}
+			else if (code == requestCode::isp) {
+				return j["isp"];
+			}
+        }
+        else {
+			debug.log(_ERROR, "Failed to get data from ip-api.com.");
+			return "";
+        }
     }
 
     std::vector<std::string> sniffCallerIP() {
@@ -146,13 +171,11 @@ public:
 
 							// filter out local IP addresses and duplicates
                             if (ipStr.rfind("192.0.0", 0) != 0 && ipStr.rfind("192.168.", 0) != 0 && std::find(ips.begin(), ips.end(), ipStr) == ips.end()) {
-								//std::string isp = getData(ipStr, requestCode::isp);
+								std::string isp = getData(ipStr, requestCode::isp);
 								// filter out anydesk servers (no one have internet connection from ovh or dod xd)
-								//if (isp.find("OVH") == std::string::npos && isp.find("DoD") == std::string::npos) { // npos == not found
-                                //    ips.push_back(ipStr);
-                                //}
-								ips.push_back(ipStr);
-
+								if (isp != "" && isp.find("OVH") == std::string::npos && isp.find("DoD") == std::string::npos) { // npos == not found
+                                    ips.push_back(ipStr);
+                                }
                             }
                         }
                     }

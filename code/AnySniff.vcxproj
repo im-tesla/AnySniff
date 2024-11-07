@@ -33,7 +33,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\out</OutDir>
     <IntDir>$(SolutionDir)\out</IntDir>
-    <IncludePath>$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\tesla\source\repos\AnySniff\code\depedencies;$(IncludePath)</IncludePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -60,6 +60,7 @@
   <ItemGroup>
     <ClInclude Include="anydesk.h" />
     <ClInclude Include="debug.h" />
+    <ClInclude Include="depedencies\httplib.h" />
     <ClInclude Include="depedencies\json.hpp" />
     <ClInclude Include="exiting.h" />
   </ItemGroup>
