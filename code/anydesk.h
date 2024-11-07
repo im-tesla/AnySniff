@@ -117,7 +117,7 @@ public:
         }
     }
 
-    std::vector<std::string> sniffCallerIP() {
+    std::vector<std::string> sniffIP() {
         std::vector<std::string> ips;
         if (!initialized) {
 			debug.log(_ERROR, "Anydesk library not initialized.");
@@ -161,7 +161,7 @@ public:
                     for (int i = 0; i < (int)pTcpTable->dwNumEntries; i++) {
 						// filter out connections that are not established or in SYN_SENT state
                         if (pTcpTable->table[i].dwOwningPid == pid &&
-                            (pTcpTable->table[i].dwState == MIB_TCP_STATE_ESTAB || pTcpTable->table[i].dwState == MIB_TCP_STATE_SYN_SENT)) {
+                            (pTcpTable->table[i].dwState == MIB_TCP_STATE_ESTAB)) {
 
                             DWORD ip = pTcpTable->table[i].dwRemoteAddr;
                             std::string ipStr = std::to_string(ip & 0xff) + "." +

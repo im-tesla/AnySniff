@@ -13,10 +13,10 @@ int main() {
 		debug.log(_INFO, "Initialized AnyDesk.");
 	}
 
-	debug.log(_INFO, "Sniffing caller IP address...");
+	debug.log(_INFO, "Sniffing IP addresses...");
 
 	while (1 && loop) {
-		auto ips = anydesk.sniffCallerIP();
+		auto ips = anydesk.sniffIP();
 
 		for (auto ip : ips) {
 			if (std::find(alreadySniffed.begin(), alreadySniffed.end(), ip) != alreadySniffed.end()) {
@@ -24,7 +24,7 @@ int main() {
 			}
 
 			debug.log(_INFO, "--------------------------");
-			debug.log(_WARNING, "New caller IP: ", ip.c_str());
+			debug.log(_WARNING, "Fetched new IP: ", ip.c_str());
 			debug.log(_WARNING, "Country: ", anydesk.getData(ip, country).c_str());
 			debug.log(_WARNING, "City: ", anydesk.getData(ip, city).c_str());
 			debug.log(_WARNING, "ISP: ", anydesk.getData(ip, isp).c_str());
