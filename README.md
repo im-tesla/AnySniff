@@ -1,10 +1,10 @@
 # AnySniff
 
-**AnySniff** is a C++20 program designed for educational and research purposes to identify the IP addresses of callers via AnyDesk. This tool logs information such as IP address, country, city, and ISP, allowing users to gain insights into caller details during AnyDesk sessions.
+**AnySniff** is a C++20 program designed for educational and research purposes to identify the IP addresses of someone by them calling us or by calling them via AnyDesk. This tool logs information such as IP address, country, city, and ISP, allowing users to gain insights into caller details during AnyDesk sessions.
 
 ## Features
 
-- **Caller IP Sniffing:** Detects the IP address of incoming calls through AnyDesk.
+- **IP Sniffing:** Detects the victim IP address of by making call or receiving call from them through AnyDesk.
 - **Geolocation Information:** Logs country, city, and ISP details based on IP addresses.
 - **Efficient Logging:** Ensures that each IP is logged only once to avoid redundant data.
 
@@ -22,16 +22,7 @@ Run the compiled executable from the output directory:
 ```
 .\AnySniff.exe
 ```
-The program will initialize and begin sniffing for caller IPs, logging them along with relevant geolocation data.
-
-## Code Overview
-
-The core components of the program are as follows:
-
-- **Initialization**: Sets up the console handler for clean exit, windows API
-- **IP Sniffing**: Continuously sniffs caller IPs, logging new addresses with additional details such as country and ISP.
-- **Loop Control**: Maintains a list of already sniffed IPs to avoid duplicate entries.
-- **Logging**: Uses a custom debug logger to display information with different levels of importance (INFO, WARNING, ERROR, etc.).
+The program will initialize and begin sniffing for someone IP, logging them along with relevant geolocation data.
 
 ### Example Log Output
 ```
